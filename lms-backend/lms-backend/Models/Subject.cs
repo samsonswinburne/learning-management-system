@@ -42,6 +42,9 @@ namespace lms_backend.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
+        public ObjectId AssignmentId { get; set; }
+        public int GradeNumber { get; set; }
+        public string Feedback {  get; set; }
 
     }
 }
