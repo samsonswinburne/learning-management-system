@@ -12,6 +12,13 @@
 /.next/
 /out/
 
+#visual studio
+/.suo
+/.vs
+/DesignTimeBuild
+/FileContentIndex
+/v17
+/ProjectEvaluation
 # production
 /build
 
@@ -28,6 +35,7 @@ yarn-error.log*
 .env*.local
 .env
 appsettings.json
+appsettings*.json
 # vercel
 .vercel
 

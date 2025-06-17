@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "QvB6+D/7m3FMljeMCn2sqyflj5g49zZ7RX0r+iGGYnQ=",
+  "Source": "lms-backend",
+  "BasePath": "_content/lms-backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
