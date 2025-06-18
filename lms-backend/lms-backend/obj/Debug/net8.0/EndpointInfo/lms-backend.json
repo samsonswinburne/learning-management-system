@@ -57,6 +57,58 @@
         }
       }
     },
+    "/api/semester/create": {
+      "post": {
+        "tags": [
+          "Semester"
+        ],
+        "operationId": "create semester",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSemesterRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSemesterRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSemesterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/subject/create": {
       "post": {
         "tags": [
@@ -227,6 +279,20 @@
             "nullable": true
           },
           "profilePictureLink": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateSemesterRequest": {
+        "type": "object",
+        "properties": {
+          "semesterNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subjectId": {
             "type": "string",
             "nullable": true
           }

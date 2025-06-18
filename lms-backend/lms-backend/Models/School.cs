@@ -5,7 +5,7 @@ namespace lms_backend.Models
 {
     public class School
     {
-        public School(string name, string? profilePictureLink)
+        public School(string name, string? profilePictureLink, int semesterNumber = 0)
         {
             Name = name;
             ProfilePictureLink = profilePictureLink;
@@ -13,6 +13,7 @@ namespace lms_backend.Models
             StudentIds = new List<ObjectId>();
             SubjectIds = new List<ObjectId>();
             AdminIds = new List<ObjectId>();
+            SemesterNumber = semesterNumber;
         }
 
         [BsonId]
@@ -27,6 +28,8 @@ namespace lms_backend.Models
         public List<ObjectId> StudentIds { get; set; }
         
         public List<ObjectId> SubjectIds { get; set; }
+
+        public int SemesterNumber {  get; set; }
         
     }
 }

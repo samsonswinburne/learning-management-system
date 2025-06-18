@@ -1,15 +1,13 @@
 ﻿using lms_backend.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoDB.Bson;
-using lms_backend.Models;
-using lms_backend.Models.DTOs;
 namespace lms_backend.Services;
 public class MongoDBService
 {
     private readonly IMongoCollection<Student> _studentCollection;
     private readonly IMongoCollection<School> _schoolCollection;
     private readonly IMongoCollection<Subject> _subjectCollection;
+    private readonly IMongoCollection<Semester> _semesterCollection;
     private readonly IMongoCollection<Subject> _classCollection;
 
     public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
@@ -19,6 +17,7 @@ public class MongoDBService
         _studentCollection = database.GetCollection<Student>(mongoDBSettings.Value.CollectionName);
         _schoolCollection = database.GetCollection<School>("school");
         _subjectCollection = database.GetCollection<Subject>("subject");
+        _semesterCollection = database.GetCollection<Semester>("semester");
         _classCollection = database.GetCollection<Subject>("class");
 
     }
@@ -45,7 +44,17 @@ public class MongoDBService
         await _subjectCollection.InsertOneAsync(subject);
         return 200;
     }
+    //semesters
+    public async Task<int> CreateSemesterAsync(Semester semester)
+    {
+        await _semesterCollection.InsertOneAsync(semester);
 
+        var filter = Builders<Subject>.Filter.Eq(subj => subj.Id, semester.SubjectId);
+        var update = Builders<Subject>.Update.AddToSet(subj => subj.SemesterIds, semester.SemesterId);
+
+        await _subjectCollection.UpdateOneAsync(filter, update);
+        return 200;
+    }
     //schools
     public async Task CreateSchoolAsync(School school, Student admin)
     {

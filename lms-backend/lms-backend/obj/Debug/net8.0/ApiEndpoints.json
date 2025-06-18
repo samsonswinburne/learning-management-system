@@ -27,6 +27,33 @@
     "EndpointName": "Create School"
   },
   {
+    "ContainingType": "lms_backend.Controllers.SemesterController",
+    "Method": "CreateSemester",
+    "RelativePath": "api/semester/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lms_backend.Models.DTOs.CreateSemesterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "create semester"
+  },
+  {
     "ContainingType": "lms_backend.Controllers.SubjectController",
     "Method": "CreateSubject",
     "RelativePath": "api/subject/create",
