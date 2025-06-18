@@ -12,6 +12,7 @@ namespace lms_backend.Models
             TeacherIds = new List<ObjectId>();
             StudentIds = new List<ObjectId>();
             SubjectIds = new List<ObjectId>();
+            AdminIds = new List<ObjectId>();
         }
 
         [BsonId]
@@ -20,6 +21,7 @@ namespace lms_backend.Models
         [BsonRequired]
         public string Name {  get; set; }
         public string? ProfilePictureLink {  get; set; }
+        public List<ObjectId> AdminIds { get; set; }
         public List<ObjectId> TeacherIds { get; set; }
         
         public List<ObjectId> StudentIds { get; set; }

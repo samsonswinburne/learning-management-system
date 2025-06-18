@@ -3,13 +3,14 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using lms_backend.Models;
+using lms_backend.Models.DTOs;
 namespace lms_backend.Services;
 public class MongoDBService
 {
     private readonly IMongoCollection<Student> _studentCollection;
     private readonly IMongoCollection<School> _schoolCollection;
     private readonly IMongoCollection<Subject> _subjectCollection;
-    private readonly IMongoCollection<Class> _classCollection;
+    private readonly IMongoCollection<Subject> _classCollection;
 
     public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
     {
@@ -18,9 +19,11 @@ public class MongoDBService
         _studentCollection = database.GetCollection<Student>(mongoDBSettings.Value.CollectionName);
         _schoolCollection = database.GetCollection<School>("school");
         _subjectCollection = database.GetCollection<Subject>("subject");
-        _classCollection = database.GetCollection<Class>("class");
+        _classCollection = database.GetCollection<Subject>("class");
 
     }
+
+    // students
     public async Task<List<Student>> GetAllStudentsAsync() { return null; }
     public async Task<Student> FetchStudentByEmailAsync(string email)
     {
@@ -32,9 +35,40 @@ public class MongoDBService
     }
     public async Task AddStudentToClassAsync(string id, string movieId) { }
     public async Task DeleteStudentAsync(string id) { }
-    public async Task CreateSchoolAsync(School school)
+    
+    //classes
+
+
+    //subjects
+    public async Task<int> CreateSubjectAsync(Subject subject)
+    {
+        await _subjectCollection.InsertOneAsync(subject);
+        return 200;
+    }
+
+    //schools
+    public async Task CreateSchoolAsync(School school, Student admin)
     {
         await _schoolCollection.InsertOneAsync(school);
+
+        admin.SchoolId = school.Id;
+
+        await _studentCollection.InsertOneAsync(admin);
+
+        var filterBuilder = Builders<School>.Filter;
+
+
+        var filter = filterBuilder.Eq(s => s.Id, school.Id);
+
+        var updateBuilder = Builders<School>.Update;
+
+        var update = updateBuilder.Combine(
+            updateBuilder.AddToSet(s => s.AdminIds, admin.Id) 
+            );
+
+
+        await _schoolCollection.UpdateOneAsync(filter, update);
     }
+    
 
 }

@@ -6,6 +6,14 @@ namespace lms_backend.Models
 {
     public class Class
     {
+        public Class(ObjectId subjectCode, int semesterNumber, bool active)
+        {
+            this.SubjectCode = subjectCode;
+            SemesterNumber = semesterNumber;
+            Active = active;
+
+        }
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }

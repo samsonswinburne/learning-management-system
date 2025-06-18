@@ -5,14 +5,31 @@ namespace lms_backend.Models
 {
     public class Subject
     {
+        public Subject(string subjectCode, string subjectName, string subjectDescription, string? subjectPictureLink, ObjectId schoolId)
+        {
+            SubjectCode = subjectCode;
+            SubjectName = subjectName;
+            ClassIds = new List<ObjectId>();
+            StudentIds = new List<ObjectId>();
+            TeacherIds = new List<ObjectId>();
+            SubjectDescription = subjectDescription;
+            SubjectPictureLink = subjectPictureLink;
+            SchoolId = schoolId;
+        }
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId SubjectCode { get; set; }
+        public ObjectId Id { get; set; }
+        public string SubjectCode { get; set; }
+        public string SubjectName { get; set; }
         
         public List<ObjectId> ClassIds { get; set; }
 
-
+        public List<ObjectId> TeacherIds { get; set; }
         public List<ObjectId> StudentIds { get; set; }
+
+        public string SubjectDescription { get; set; }
+        public string? SubjectPictureLink { get; set; }
+        public ObjectId SchoolId {  get; set; }
 
     }
 

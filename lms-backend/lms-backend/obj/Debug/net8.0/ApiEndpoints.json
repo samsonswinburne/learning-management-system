@@ -1,5 +1,59 @@
 [
   {
+    "ContainingType": "lms_backend.Controllers.SchoolController",
+    "Method": "CreateSchool",
+    "RelativePath": "api/school/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lms_backend.Models.DTOs.CreateSchoolRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "Create School"
+  },
+  {
+    "ContainingType": "lms_backend.Controllers.SubjectController",
+    "Method": "CreateSubject",
+    "RelativePath": "api/subject/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lms_backend.Models.DTOs.CreateSubjectRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "Create a subject"
+  },
+  {
     "ContainingType": "lms_backend.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
@@ -36,23 +90,6 @@
       }
     ],
     "EndpointName": "Temporary create student"
-  },
-  {
-    "ContainingType": "lms_backend.Controllers.WeatherForecastController",
-    "Method": "CreateSchool",
-    "RelativePath": "WeatherForecast/createschool",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ],
-    "EndpointName": "create school test"
   },
   {
     "ContainingType": "lms_backend.Controllers.WeatherForecastController",

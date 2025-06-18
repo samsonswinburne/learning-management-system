@@ -57,11 +57,11 @@ namespace lms_backend.Controllers
             return Argon2.Verify(student.Password, password);
         }
 
-        [HttpPost("createschool", Name = "create school test")]
-        public async Task CreateSchool()
-        {
-            School school = new School("Samsons School", null);
-           await _db.CreateSchoolAsync(school);
-        }
+        //[HttpPost("createschool", Name = "create school test")]
+        //public async Task CreateSchool()
+        //{
+        //    School school = new School("Samsons School", null);
+        //   await _db.CreateSchoolAsync(school);
+        //}
     }
 }

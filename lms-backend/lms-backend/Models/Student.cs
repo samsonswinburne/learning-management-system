@@ -6,7 +6,7 @@ namespace lms_backend.Models
 {
     public class Student
     {
-        public Student(string email, string password, string? phoneNumber, string firstName, string? lastName, DateOnly birthDate, bool teacher, string? profilePictureLink, ObjectId schoolId)
+        public Student(string email, string password, string? phoneNumber, string firstName, string? lastName, DateOnly birthDate, bool teacher, string? profilePictureLink, ObjectId? schoolId)
         {
             Email = email;
 
@@ -17,6 +17,8 @@ namespace lms_backend.Models
             BirthDate = birthDate;
             Teacher = teacher;
             ProfilePictureLink = profilePictureLink;
+
+
             SchoolId = schoolId;
             SubjectIds = new List<ObjectId>();
         }
@@ -40,7 +42,7 @@ namespace lms_backend.Models
         public string? ProfilePictureLink {  get; set; }
 
         
-        public ObjectId SchoolId { get; set; }
+        public ObjectId? SchoolId { get; set; }
         public List<ObjectId> SubjectIds { get; set; }
 
     }
