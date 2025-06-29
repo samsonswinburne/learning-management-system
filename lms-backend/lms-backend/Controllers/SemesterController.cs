@@ -19,6 +19,8 @@ namespace lms_backend.Controllers
         public async Task<int> CreateSemester([FromBody] CreateSemesterRequest request)
         {
             Semester semester = new Semester(request.SemesterNumber, new ObjectId(request.SubjectId));
+            
+
             await DB.CreateSemesterAsync(semester);
             return 200;
         }

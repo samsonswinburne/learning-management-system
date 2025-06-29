@@ -39,14 +39,20 @@ namespace lms_backend.Models
             StudentIds = new List<ObjectId>();
             SubjectId = subjectId;
             AssignmentIds = new List<ObjectId>();
+    
+
+
 
             //todo, check if the current school semester is this semester number, then set current accordingly
+
+            // implemented in MongoDBService in CreateSemesterAsync
             Current = false;
         }
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId SemesterId { get; set; }
         public ObjectId SubjectId {  get; set; }
+        public ObjectId? SchoolId { get; set; }
         public int SemesterNumber {  get; set; }
         public List<ObjectId> ClassIds { get; set; }
         public List<ObjectId> TeacherIds { get; set; }
@@ -54,6 +60,7 @@ namespace lms_backend.Models
         public bool Current {  get; set; }
         
         public List<ObjectId> AssignmentIds { get; set; }
+
     }
 
     public class Assignment

@@ -1,5 +1,6 @@
 ﻿using lms_backend.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 namespace lms_backend.Services;
 public class MongoDBService
@@ -49,17 +50,44 @@ public class MongoDBService
     {
         var filter = Builders<Subject>.Filter.Eq(subj => subj.Id, semester.SubjectId);
 
+        
+
         var subject = await _subjectCollection.Find(filter).FirstOrDefaultAsync();
+
+        semester.SchoolId = subject.SchoolId;
         semester.TeacherIds = semester.TeacherIds.Concat(subject.TeacherIds).ToList();
+
+        var secondFilter = Builders<School>.Filter.Eq(school => school.Id, semester.SchoolId);
+        var school = await _schoolCollection.Find(secondFilter).FirstOrDefaultAsync();
+
+        if(semester.SemesterNumber == school.SemesterNumber)
+        {
+            semester.Current = true;
+        }
+
 
         await _semesterCollection.InsertOneAsync(semester);
 
-       
+        
+
+    
+
         var update = Builders<Subject>.Update.AddToSet(subj => subj.SemesterIds, semester.SemesterId);
 
         await _subjectCollection.UpdateOneAsync(filter, update);
         return 200;
     }
+    // may be deprecated if its not needed
+    //public async Task<ObjectId> GetSchoolIdFromSemesterAsync(Semester semester)
+    //{
+    //    var filter = Builders<Subject>.Filter.Eq(subj => subj.Id, semester.SubjectId);
+
+    //    var subject = await _subjectCollection.Find(filter).FirstOrDefaultAsync();
+
+    //    return subject.SchoolId;
+    //}
+
+
     //schools
     public async Task CreateSchoolAsync(School school, Student admin)
     {
