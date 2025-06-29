@@ -47,9 +47,14 @@ public class MongoDBService
     //semesters
     public async Task<int> CreateSemesterAsync(Semester semester)
     {
+        var filter = Builders<Subject>.Filter.Eq(subj => subj.Id, semester.SubjectId);
+
+        var subject = await _subjectCollection.Find(filter).FirstOrDefaultAsync();
+        semester.TeacherIds = semester.TeacherIds.Concat(subject.TeacherIds).ToList();
+
         await _semesterCollection.InsertOneAsync(semester);
 
-        var filter = Builders<Subject>.Filter.Eq(subj => subj.Id, semester.SubjectId);
+       
         var update = Builders<Subject>.Update.AddToSet(subj => subj.SemesterIds, semester.SemesterId);
 
         await _subjectCollection.UpdateOneAsync(filter, update);
